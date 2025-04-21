@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <h3 class="ms-5 display-4 text-light">Sport Cars</h3>
+            <ul class="navbar-nav ms-auto me-5 ">
+                <li class="nav-item ms-5 "><a class="nav-link  text-light ms-5" href="index.html">Home</a></li>
+                <li class="nav-item ms-5"><a class="nav-link  text-light ms-5" href="index.html">About</a></li>
+                <li class="nav-item ms-5"><a class="nav-link  text-light ms-5" href="car.html">Cars</a></li>
+                <li class="nav-item ms-5"><a class=" nav-link text-light ms-5" href="contact.html">Contact</a></li> 
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="carDetail"></section>
+    </main>
+    <script>
+        let cars = [
+            {id: "1", name: "Lamborghini Huracan",image:"https://cdn.pixabay.com/photo/2021/11/08/14/25/car-6779247_1280.jpg", ARAI_Mileage: "11.24 kmpl", Engine: "5.2-liter V10", Max_Torque: "600Nm@6500rpm", Transmission_Type: "Automatic", Body_type: "Coupe", price: "2.99 - 3.97 Cr"},
+            {id: "2",image:"https://cdn.pixabay.com/photo/2020/07/30/00/16/porsche-5449102_1280.jpg", name: "Porsche 911 GT3", City_Mileage: "5.5 kmpl", Engine: "3996 cc", Max_Torque: "465Nm@6300rpm", Transmission_Type: "Automatic", Body_type: "Coupe", price: "1.99 - 3.51 Cr"},
+            {id: "3",name: "McLaren 600LT",image:"https://cdn.pixabay.com/photo/2023/04/03/10/19/car-7896480_1280.jpg", City_Mileage: "6.1 kmpl", Engine: "3994 cc", Max_Torque: "800Nm", Transmission_Type: "Automatic", Body_type: "Coupe", price: "5.91 Cr"}
+        ];
+        function getParameterById(id){
+            let url = new URL(window.location.href);
+            return url.searchParams.get(id);
+        }
+        let carId = getParameterById("id");
+
+        let car;
+        for(let i=0;i<cars.length;i++){
+            if(cars[i].id===carId){
+                car=cars[i];
+                break;
+            }
+        }
+
+    
+        let carDetailElement = document.getElementById("carDetail");
+
+        if(car){
+            carDetailElement.innerHTML = `
+                <h1 class="text-center">Car Details</h1>
+                <h2 class="text-center display-5">${car.name}</h2>
+                <div class="d-flex justify-content-center">
+                    <img src="${car.image}" alt="${car.name}" class="img-fluid mb-5" style="max-width: 90%; height: auto; max-height: 620px;">
+                    </div>
+                <ul class="text-center list-group ms-5 me-5 mt-4">
+                    <li class="list-group-item "><strong>ARIA Mileage</strong>: ${car.ARAI_Mileage || car.City_Mileage}</li>
+                    <li class="list-group-item "><strong>Engine</strong>: ${car.Engine}</li>
+                    <li class="list-group-item"><strong>Max Torque</strong>: ${car.Max_Torque}</li>
+                    <li class="list-group-item"><strong>Transmission Type</strong>: ${car.Transmission_Type}</li>
+                    <li class="list-group-item"><strong>Body Type</strong>: ${car.Body_type}</li>
+                    <li class="list-group-item"><strong>Price</strong>: ${car.price}</li>
+                </ul>
+            `;
+        } else {
+            carDetailElement.innerHTML = `<h1>Car not found</h1>`;
+        }
+        
+    </script>
+     <footer class="bg-dark text-light py-1 text-center mt-5">
+        <div class="container">
+        <p >&copy; 2024 Sport Car</p>
+      </footer>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carInfo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <h3 class="ms-5 display-4 text-light">Sport Cars</h3>
+            <ul class="navbar-nav ms-auto me-5 ">
+                <li class="nav-item ms-5 "><a class="nav-link  text-light ms-5" href="index.html">Home</a></li>
+                <li class="nav-item ms-5"><a class="nav-link  text-light ms-5" href="index.html">About</a></li>
+                <li class="nav-item ms-5"><a class="nav-link  text-light ms-5" href="">Cars</a></li>
+                <li class="nav-item ms-5"><a class=" nav-link text-light ms-5"href="contact.html">Contact</a></li> 
+            </ul>
+    
+        </nav>
+    </header>
+    <main class="p-4">
+        <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+              <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2020/02/03/10/07/lamborghini-4815249_1280.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Lamborghini Huracan</h5>
+                  <p class="card-text">The Lamborghini Huracán is a striking supercar known for its aggressive styling and thrilling performance. Powered by a 5.2-liter V10 engine that generates up to 631 horsepower, it delivers explosive acceleration and an exhilarating driving experience.</p>
+                  <a href="cardetails.html?id=1" class="btn btn-primary"> View details</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2017/10/18/20/32/porsche-911-gt3-2865400_1280.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Porsche 911 GT3</h5>
+                  <p class="card-text">The Porsche 911 GT3 is a highly revered track-oriented sports car, celebrated for its precision and agility. It features a naturally aspirated 4.0-liter flat-six engine that produces up to 518 horsepower, delivering a thrilling and responsive driving experience.</p>
+                  <a href="cardetails.html?id=2" class="btn btn-primary"> View details</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2019/09/11/21/43/mclaren-4470020_1280.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">McLaren 600LT</h5>
+                  <p class="card-text">The McLaren 600LT is a high-performance sports car that epitomizes the brand's focus on lightweight, agile driving. With a 3.8-liter twin-turbo V8 engine delivering 592 horsepower, it offers exhilarating acceleration and precise handling.  Its track-focused design and enhanced aerodynamics</p>
+                  <a href="cardetails.html?id=3" class="btn btn-primary">View details</a>
+
+                 </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="container mt-5">
+              <h1 class="display-6">Choose Your Favorite Sports Car </h1>
+              <div class="mb-3">
+                 <label for="lamborghini"><input type="checkbox" name="sportcar" value="lamborghini" id="lamborghini"/> Lamborghini</label><br>
+                 <label for="porsche"><input type="checkbox" name="sportcar" value="porsche" id="porsche"/> Porsche</label><br>
+                 <label for="mclaren"><input type="checkbox" name="sportcar" value="mclaren" id="mclaren"/> McLaren</label>
+                 <br>
+                 <button id="sportcarBtn" class="bg-primary text-light">Display Some Fun Fact</button>
+                 <p id="sportcarResult"></p>
+                 <h1 class="display-6">What feature do you prioritize most in a sports car??</h1>
+                 <label for="speed"><input type="radio" name="feature" value="speed" id="speed"/> Speed</label><br>
+                 <label for="design"><input type="radio" name="feature" value="design" id="design"/> Design</label><br>
+                 <label for="comfort"><input type="radio" name="feature" value="comfort" id="comfort"/>  Comfort</label><br>
+                 <label for="handling"><input type="radio" name="feature" value="handling" id="handling"/> Handling</label><br>
+                 <button id="featureBtn"class="bg-primary text-light">Display Features</button>
+                 <p id="featureResult"></p>
+              </div>
+            </div>
+
+    </main>
+    <script>
+       const sportCarResult = document.getElementById("sportcarResult");
+const sportcarBtn = document.getElementById("sportcarBtn");
+const funFacts = {
+    lamborghini: "<em>Lamborghini Huracan </em>can reach 0-60 mph in just 2.5 seconds!",
+    porsche: "<em>The Porsche 911 GT3's</em> engine revs up to 9,000 RPM, delivering an exhilarating sound.",
+    mclaren: "<em>The McLaren 600LT</em> features top-mounted exhaust pipes that spit flames!"
+};
+
+sportcarBtn.addEventListener('click', function () {
+    const sportCar = document.querySelectorAll('input[name="sportcar"]:checked');
+    let selectedSportCar = [];
+    let selectedFunFacts = [];
+    for (let i = 0; i < sportCar.length; i++) {
+        selectedSportCar.push(sportCar[i].value);
+        selectedFunFacts.push(funFacts[sportCar[i].value]);
+    }
+    if (selectedSportCar.length > 0) {
+        sportCarResult.innerHTML = `
+            <strong>You have selected:</strong> ${selectedSportCar.join(", ")}<br>
+            <strong>Fun Facts:</strong><br> ${selectedFunFacts.join("<br><br>")}
+        `;
+    } else {
+        sportCarResult.textContent = "You haven't selected any car!";
+    }
+});
+const featureBtn=document.getElementById("featureBtn");
+const featureResult=document.getElementById("featureResult");
+featureBtn.addEventListener('click',function(){
+  const selectedFeature=document.querySelector('input[name="feature"]:checked');
+  if(selectedFeature){
+    featureResult.textContent=` You prioritize: ${selectedFeature.value}`
+  }
+    else{
+      featureResult.textContent="Please select at least one priority"
+
+    }
+  }
+)
+
+    </script>
+    <footer class="bg-dark text-light py-1 text-center">
+      <div class="container">
+      <p >&copy; 2024 Sport Car </p>
+    </footer>
+  </div>
+    
+</body>
+</html>
